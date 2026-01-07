@@ -285,9 +285,21 @@ if uploaded_files:
                     df_act = df_raw[[c_nama, c_masuk, c_keluar, c_lokasi, c_catatan]].copy()
                     df_act.columns = ['Nama', 'Masuk_Raw', 'Keluar_Raw', 'Lokasi', 'Catatan']
                     
-                    # Fix: Add dayfirst=True for Indonesia Date Format stability
-                    df_act['Masuk_Obj'] = pd.to_datetime(df_act['Masuk_Raw'], errors='coerce', dayfirst=True)
-                    df_act['Keluar_Obj'] = pd.to_datetime(df_act['Keluar_Raw'], errors='coerce', dayfirst=True)
+                    # === PERBAIKAN DATE PARSING (AUTO-DETECT FORMAT) ===
+                    # Cek sample data pertama untuk melihat apakah diawali Tahun (2026/...)
+                    sample_date = df_act['Masuk_Raw'].dropna().astype(str).iloc[0] if not df_act['Masuk_Raw'].dropna().empty else ""
+                    
+                    # Logika: Jika 4 karakter pertama adalah angka > 2000, maka format YYYY (Tahun duluan)
+                    is_year_first = sample_date.strip()[0:4].isdigit() and int(sample_date.strip()[0:4]) > 2000
+                    
+                    if is_year_first:
+                        # Format YYYY/MM/DD (Standar Mesin/ISO) -> dayfirst=False
+                        df_act['Masuk_Obj'] = pd.to_datetime(df_act['Masuk_Raw'], errors='coerce', dayfirst=False)
+                        df_act['Keluar_Obj'] = pd.to_datetime(df_act['Keluar_Raw'], errors='coerce', dayfirst=False)
+                    else:
+                        # Format DD/MM/YYYY (Standar Indonesia) -> dayfirst=True
+                        df_act['Masuk_Obj'] = pd.to_datetime(df_act['Masuk_Raw'], errors='coerce', dayfirst=True)
+                        df_act['Keluar_Obj'] = pd.to_datetime(df_act['Keluar_Raw'], errors='coerce', dayfirst=True)
                     
                     df_act = df_act.dropna(subset=['Masuk_Obj']) 
                     
@@ -463,9 +475,19 @@ if 'df_full' in st.session_state:
     with st.sidebar.expander(tr("🌪️ Filter Data", "🌪️ Filter & Slice"), expanded=True):
         sel_tahun = st.multiselect(tr("Tahun", "Year"), sorted(df['Tahun'].unique()), default=sorted(df['Tahun'].unique()))
         
+        # --- UPDATE START: ADDED SELECT ALL FOR MONTH ---
         # Sort using Bulan_Angka but display Bulan
         df_bln = df[['Bulan', 'Bulan_Angka']].drop_duplicates().sort_values('Bulan_Angka')
-        sel_bulan = st.multiselect(tr("Bulan", "Month"), df_bln['Bulan'].tolist(), default=df_bln['Bulan'].tolist())
+        all_bulan = df_bln['Bulan'].tolist()
+        
+        # Checkbox for Select All Month
+        is_select_all_bulan = st.checkbox(tr("Pilih Semua Bulan", "Select All Months"), value=True)
+        
+        if is_select_all_bulan:
+            sel_bulan = st.multiselect(tr("Bulan", "Month"), all_bulan, default=all_bulan)
+        else:
+            sel_bulan = st.multiselect(tr("Bulan", "Month"), all_bulan)
+        # --- UPDATE END ---
         
         if not df.empty:
             w_min, w_max = int(df['Minggu_Ke'].min()), int(df['Minggu_Ke'].max())
@@ -883,12 +905,12 @@ if 'df_full' in st.session_state:
                 with c_right:
                     final_score = (
                         (v_kom * 0.10) +             
-                        (score_kpi_final * 0.20) +   
-                        (score_att * 0.10) +        
-                        (v_prob * 0.10) +            
+                        (score_kpi_final * 0.20) +    
+                        (score_att * 0.10) +         
+                        (v_prob * 0.10) +             
                         (v_wfo * 0.20) +             
-                        (v_qual * 0.15) +            
-                        (score_project * 0.15)       
+                        (v_qual * 0.15) +             
+                        (score_project * 0.15)        
                     )
                     
                     if final_score >= 90: grade, color, bg = tr("A (Sangat Baik)", "A (Outstanding)"), "#10b981", "#d1fae5"
