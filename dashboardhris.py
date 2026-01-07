@@ -446,7 +446,6 @@ if uploaded_files:
 
 # --- 6. VISUALIZATION ENGINE ---
 if 'df_full' in st.session_state:
-    # Use copy to avoid modifying original state inplace
     df = st.session_state['df_full'].copy()
     
     # --- DYNAMIC LANGUAGE SWITCHING FOR DATA CONTENT ---
@@ -464,7 +463,7 @@ if 'df_full' in st.session_state:
     with st.sidebar.expander(tr("🌪️ Filter Data", "🌪️ Filter & Slice"), expanded=True):
         sel_tahun = st.multiselect(tr("Tahun", "Year"), sorted(df['Tahun'].unique()), default=sorted(df['Tahun'].unique()))
         
-        # Sort using Bulan_Angka but display Bulan (which is now dynamic)
+        # Sort using Bulan_Angka but display Bulan
         df_bln = df[['Bulan', 'Bulan_Angka']].drop_duplicates().sort_values('Bulan_Angka')
         sel_bulan = st.multiselect(tr("Bulan", "Month"), df_bln['Bulan'].tolist(), default=df_bln['Bulan'].tolist())
         
