@@ -125,7 +125,8 @@ kantor_list = [
     "Foresta Business Loft", "Hotel Santika Premiere ICE BSD", "ICE BSD", "ICE Business Park", "IPEKA BSD", "Jakarta Nanyang School", "Mekia Park", 
     "Mercure Tangerang BSD City", "Northpoint Business Park", "Pasar Modern Intermoda BSD", "Prasetiya Mulya University", "QBig BSD City", "Regentown", 
     "Sapphire Sky Hotel", "Sinarmas World Academy", "Stasiun Cisauk", "Terminal Intermoda BSD", "Unilever Indonesia Head Office", "Vanya Park Lake", 
-    "Virginia Arcade", "West Village Business Park", "Wisma BCA Foresta", "Vanya Park", "Metropark"
+    "Virginia Arcade", "West Village Business Park", "Wisma BCA Foresta", "Vanya Park", "Metropark","Pradita University", "AKADEMI KESEHATAN ANDALUSIA", "TRIPROCKETS",
+    "TAMBUNAN HELENASARI DR"
 ]
 
 # --- 3. HELPER FUNCTIONS ---
