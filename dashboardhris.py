@@ -124,9 +124,10 @@ kantor_list = [
     "Foresta Business Loft", "Hotel Santika Premiere ICE BSD", "ICE BSD", "ICE Business Park", "IPEKA BSD", "Jakarta Nanyang School", "Mekia Park", 
     "Mercure Tangerang BSD City", "Northpoint Business Park", "Pasar Modern Intermoda BSD", "Prasetiya Mulya University", "QBig BSD City", "Regentown", 
     "Sapphire Sky Hotel", "Sinarmas World Academy", "Stasiun Cisauk", "Terminal Intermoda BSD", "Unilever Indonesia Head Office", "Vanya Park Lake", 
-    "Virginia Arcade", "West Village Business Park", "Wisma BCA Foresta", "Vanya Park", "Metropark","PRADITA UNIVERSITY", "AKADEMI KESEHATAN ANDALUSIA", "TRIPROCKETS",
+    "Virginia Arcade", "West Village Business Park", "Wisma BCA Foresta", "Vanya Park", "Metropark","PRADITA UNIVERSITY", "TRIPROCKETS",
     "TAMBUNAN HELENASARI DR","GRHA UNILEVER", "LOBBY UTAMA GRHA UNILEVER", "OZ COMPANY", "GEDUNG UNILEVER", "ATM CIMB NIAGA (GEDUNG UNILEVER BSD)", "AMARTA HQ UNILEVER", "UNILEVER GYM", 
-    "BUAVITA JUICE BAR", "KANTIN BASEMENT 1 GRHA UNILEVER","INSTITUT FRANAIS D INDONSIE SERPONG IFI SERPONG"
+    "BUAVITA JUICE BAR", "KANTIN BASEMENT 1 GRHA UNILEVER","INSTITUT FRANAIS D INDONSIE SERPONG IFI SERPONG", "NANO STAR INDONESIA", "SANJAYA SOLUSINDO PT SANJAYA SOLUSI DIGITAL INDONESIA",
+    "TRAVELLINO TOUR", "RUWAC . RUWAC INDONESIA", "FISHOP SMT FOOD PLAZA GADING SERPONG", "WARTEG BAHARI", "DUASAUDARA", 
 
 ]
 
